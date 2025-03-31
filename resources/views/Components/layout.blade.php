@@ -16,20 +16,19 @@
                 <div class="flex h-16 items-center justify-between">
                     <div class="flex items-center">
                         <div class="shrink-0">
-                            <img class="size-8"
-                                src="https://laracasts.com/images/logo/logo-triangle.svg"
+                            <img class="size-8" src="https://laracasts.com/images/logo/logo-triangle.svg"
                                 alt="Your Company">
                         </div>
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
                                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                                 <a href="/"
-                                    class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                                    class="{{ request()->is('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium"
                                     aria-current="page">Home</a>
                                 <a href="/about"
-                                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
+                                    class="{{ request()->is('about') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium ">About</a>
                                 <a href="/contact"
-                                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact</a>
+                                    class="{{ request()->is('contact') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium ">Contact</a>
                             </div>
                         </div>
                     </div>
@@ -55,8 +54,7 @@
                                         <span class="absolute -inset-1.5"></span>
                                         <span class="sr-only">Open user menu</span>
                                         <img class="size-8 rounded-full"
-                                            src="https://laracasts.com/images/lary-ai-face.svg"
-                                            alt="">
+                                            src="https://laracasts.com/images/lary-ai-face.svg" alt="">
                                     </button>
                                 </div>
 
@@ -101,8 +99,7 @@
                 <div class="border-t border-gray-700 pt-4 pb-3">
                     <div class="flex items-center px-5">
                         <div class="shrink-0">
-                            <img class="size-10 rounded-full"
-                                src="https://laracasts.com/images/lary-ai-face.svg"
+                            <img class="size-10 rounded-full" src="https://laracasts.com/images/lary-ai-face.svg"
                                 alt="">
                         </div>
                         <div class="ml-3">
