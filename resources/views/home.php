@@ -8,6 +8,11 @@
 </head>
 
 <body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+    </nav>
     <h1>Hello from Home Page</h1>
 </body>
 
