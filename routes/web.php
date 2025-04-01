@@ -16,13 +16,7 @@ Route::get('/jobs', function () {
 });
 
 Route::get('/jobs/{id}', function ($id) {
-    // dump($id);
-    // dd($id);  // "dump and die"
-
-    // either add use($id) after function($job) to access $id
-    // or a short closure:
-    $job = Arr::first(Job::all(), fn($job) => $job['id'] == $id);
-    // dd($job);
+    $job = Job::find($id);
 
     return view('job', ['job' => $job]);
 });
