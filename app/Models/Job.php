@@ -29,9 +29,15 @@ class Job
         ];
     }
 
-    public static function find(int $id): array
+    public static function find(int $id): array  // return type helps catch errors in earlier parts of code
     {
         // static:: cuz we're already in Job class
-        return Arr::first(static::all(), fn($job) => $job['id'] == $id);
+        $job = Arr::first(static::all(), fn($job) => $job['id'] == $id);
+
+        if(! $job) {
+            abort(404);
+        }
+
+        return $job;
     }
 }
