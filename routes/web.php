@@ -3,7 +3,11 @@
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 
-$jobs = [
+class Job
+{
+    public static function all(): array
+    {
+        return [
             [
                 'id' => 1,
                 'title' => 'Director',
@@ -20,24 +24,26 @@ $jobs = [
                 'salary' => '$40,000',
             ],
         ];
+    }
+}
 
 Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/jobs', function () use($jobs) {
+Route::get('/jobs', function () {
     return view('jobs', [
-        'jobs' => $jobs,
+        'jobs' => Job::all(),
     ]);
 });
 
-Route::get('/jobs/{id}', function ($id) use($jobs) {
+Route::get('/jobs/{id}', function ($id) {
     // dump($id);
     // dd($id);  // "dump and die"
-    
+
     // either add use($id) after function($job) to access $id
     // or a short closure:
-    $job = Arr::first($jobs, fn($job) => $job['id'] == $id);
+    $job = Arr::first(Job::all(), fn($job) => $job['id'] == $id);
     // dd($job);
 
     return view('job', ['job' => $job]);
