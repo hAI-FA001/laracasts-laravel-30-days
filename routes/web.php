@@ -8,8 +8,11 @@ Route::get('/', function () {
 });
 
 Route::get('/jobs', function () {
-    // automatically loads based on ?page= in the URL too
-    $jobs = Job::with('employer')->simplePaginate(3);
+    // cursor = starting point/location for the next set of records
+    // most performant option
+    // downside: shows ?cursor= instead of ?page=, so we can't say "go to page X"
+    // scenarios: for infinite scrolling/not accessing a direct URL manually, large datasets, etc
+    $jobs = Job::with('employer')->cursorPaginate(3);
 
     return view('jobs', [
         'jobs' => $jobs,
