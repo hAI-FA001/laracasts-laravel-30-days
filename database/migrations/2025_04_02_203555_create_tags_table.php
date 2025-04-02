@@ -24,8 +24,8 @@ return new class extends Migration
         // naming: Jobs Tags -> singular: job tag -> underscore: job_tag
         Schema::create('job_tag', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Job::class, 'job_listing_id');  # override column name so it doesn't point to job_id
-            $table->foreignIdFor(Tag::class);
+            $table->foreignIdFor(Job::class, 'job_listing_id')->constrained()->cascadeOnDelete();  // override column name so it doesn't point to job_id
+            $table->foreignIdFor(Tag::class)->constrained()->cascadeOnDelete(); // foreign key constraints
             $table->timestamps();  // depends, sometimes you wanna track it for pivot tables
         });
     }
@@ -36,5 +36,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('tags');
+        // need this too
+        Schema::dropIfExists('job_tag');
     }
 };
