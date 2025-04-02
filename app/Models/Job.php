@@ -5,11 +5,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Job extends Model
 {
-    // 2 options: rename class to JobListing or do this
+    use HasFactory;
+
     protected $table = 'job_listings';
-    protected $fillable = ['title', 'salary'];  // allow mass assignment on these, won't allow user to update id or other attributes
+    protected $fillable = ['title', 'salary'];  // mass assignable
 }
