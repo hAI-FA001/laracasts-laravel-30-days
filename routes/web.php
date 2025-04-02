@@ -8,9 +8,8 @@ Route::get('/', function () {
 });
 
 Route::get('/jobs', function () {
-    // eager loading
-    $jobs = Job::with('employer')->get();  // returns all record, would use pagination to limit it
-    // $jobs = Job::all();  // will throw an error, saying lazy loading is disabled
+    // automatically loads based on ?page= in the URL too
+    $jobs = Job::with('employer')->paginate(3);
 
     return view('jobs', [
         'jobs' => $jobs,
