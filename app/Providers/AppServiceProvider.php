@@ -27,5 +27,8 @@ class AppServiceProvider extends ServiceProvider
         // configure defaults for pagination
         // Paginator::$defaultView('myview123');
         // Paginator::useBootstrapFive();
+
+        // method 2 to disable fillable
+        Model::unguard();
     }
 }
