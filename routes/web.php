@@ -32,11 +32,16 @@ Route::get('/jobs/{id}', function ($id) {
 });
 
 Route::post('/jobs', function () {
-    // won't work, gives 419 error due to Cross-Site Request Forgery (CSRF)
-    // e.g. filled a form on site A but it POSTs to site B -> cross-site
-    // avoided by using a token and comparing the token from the client with the one in the session
-    // if it doesn't match, Laravel throws 419 error
-    dd('hello');
+    // dd(request()->all());
+    // dd(request('title'));
+
+    Job::create([
+        'title' => request('title'),
+        'salary' => request('salary'),
+        'employer_id' => 1,
+    ]);
+
+    return redirect('/jobs');
 });
 
 Route::get('/contact', function () {

@@ -12,7 +12,7 @@ class Job extends Model
     use HasFactory;
 
     protected $table = 'job_listings';
-    protected $fillable = ['title', 'salary'];  // mass assignable
+    protected $fillable = ['title', 'salary', 'employer_id'];  // mass assignable
 
     public function employer()
     {
