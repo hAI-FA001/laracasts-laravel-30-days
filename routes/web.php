@@ -14,15 +14,21 @@ Route::get('/jobs', function () {
     // scenarios: for infinite scrolling/not accessing a direct URL manually, large datasets, etc
     $jobs = Job::with('employer')->cursorPaginate(3);
 
-    return view('jobs', [
+    // can also use jobs/index but jobs.index is more common
+    return view('jobs.index', [
         'jobs' => $jobs,
     ]);
 });
 
+Route::get('/jobs/create', function () {
+    return view('jobs.create');
+});
+
+// wildcards should go at the bottom
 Route::get('/jobs/{id}', function ($id) {
     $job = Job::find($id);
 
-    return view('job', ['job' => $job]);
+    return view('jobs.show', ['job' => $job]);
 });
 
 Route::get('/contact', function () {
