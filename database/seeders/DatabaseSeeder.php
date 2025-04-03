@@ -24,4 +24,9 @@ class DatabaseSeeder extends Seeder
         // run JobSeeder too, helpful in larger projects
         $this->call(JobSeeder::class);
     }
+
+    // factories are for quickly scaffolding data for tests
+    // seeders can trigger 1 or more factories
+    // seeders can directly interface with the database facade or eloquent models
+    // but it's usually easier to use factories
 }
