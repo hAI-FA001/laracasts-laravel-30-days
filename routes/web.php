@@ -12,7 +12,7 @@ Route::get('/jobs', function () {
     // most performant option
     // downside: shows ?cursor= instead of ?page=, so we can't say "go to page X"
     // scenarios: for infinite scrolling/not accessing a direct URL manually, large datasets, etc
-    $jobs = Job::with('employer')->cursorPaginate(3);
+    $jobs = Job::with('employer')->latest()->cursorPaginate(3);
 
     // can also use jobs/index but jobs.index is more common
     return view('jobs.index', [
