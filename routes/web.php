@@ -38,6 +38,7 @@ Route::post('/jobs', function () {
     // Laravel will redirect and fill in the $errors variable (which is available in every view)
     request()->validate([
         // corresponds with name attribute
+        // ref: https://laravel.com/docs/12.x/validation#available-validation-rules
         'title' => ['required', 'min:3'],
         'salary' => ['required'],
     ]);
