@@ -7,6 +7,6 @@
     </p>
 
     <p class="mt-6">
-        <x-simple-button href="/jobs/edit/{{ $job['id'] }}">Edit Job</x-simple-button>
+        <x-simple-button href="/jobs/{{ $job['id'] }}/edit">Edit Job</x-simple-button>
     </p>
 </x-layout>
