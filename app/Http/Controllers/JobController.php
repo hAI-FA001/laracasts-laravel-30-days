@@ -28,8 +28,8 @@ class JobController extends Controller
 
     public function store()
     {
+        // ref: https://laravel.com/docs/12.x/validation#available-validation-rules
         request()->validate([
-            // ref: https://laravel.com/docs/12.x/validation#available-validation-rules
             'title' => ['required', 'min:3'],
             'salary' => ['required'],
         ]);
