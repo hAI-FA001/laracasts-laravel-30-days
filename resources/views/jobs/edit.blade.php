@@ -45,7 +45,8 @@
 
         <div class="mt-6 flex items-center justify-between gap-x-6">
             <div class="flex items-center">
-                <button class="text-red-500 text-sm font-bold">Delete</button>
+                {{-- "form" is implicitly set to closest parent form --}}
+                <button form="delete-form" class="text-red-500 text-sm font-bold">Delete</button>
             </div>
 
             <div class="flex items-center gap-x-6">
@@ -62,7 +63,7 @@
         </div>
     </form>
 
-    <form method="POST" action="/jobs/{{ $job->id }}" class="hidden">
+    <form method="POST" action="/jobs/{{ $job->id }}" id="delete-form" class="hidden">
         @csrf
         @method("DELETE")
     </form>
