@@ -7,37 +7,30 @@ Route::get('/', function () {
     return view('home');
 });
 
+// Index
 Route::get('/jobs', function () {
-    // cursor = starting point/location for the next set of records
-    // most performant option
-    // downside: shows ?cursor= instead of ?page=, so we can't say "go to page X"
-    // scenarios: for infinite scrolling/not accessing a direct URL manually, large datasets, etc
     $jobs = Job::with('employer')->latest()->cursorPaginate(3);
 
-    // can also use jobs/index but jobs.index is more common
     return view('jobs.index', [
         'jobs' => $jobs,
     ]);
 });
 
+// Create
 Route::get('/jobs/create', function () {
     return view('jobs.create');
 });
 
-// wildcards should go at the bottom
+// Show
 Route::get('/jobs/{id}', function ($id) {
     $job = Job::find($id);
 
     return view('jobs.show', ['job' => $job]);
 });
 
+// Store
 Route::post('/jobs', function () {
-    // dd(request()->all());
-    // dd(request('title'));
-
-    // Laravel will redirect and fill in the $errors variable (which is available in every view)
     request()->validate([
-        // corresponds with name attribute
         // ref: https://laravel.com/docs/12.x/validation#available-validation-rules
         'title' => ['required', 'min:3'],
         'salary' => ['required'],
