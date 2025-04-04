@@ -83,7 +83,13 @@ Route::patch('/jobs/{id}', function ($id) {
 
 // Destroy
 Route::delete('/jobs/{id}', function ($id) {
-    // 
+    // authorize (later)
+
+    // delete job
+    Job::findOrFail($id)->delete();  // can inline instead of first storing in $job
+
+    // redirect
+    return redirect('/jobs');
 });
 
 Route::get('/contact', function () {
