@@ -22,9 +22,11 @@ Route::get('/jobs/create', function () {
 });
 
 // Show
-Route::get('/jobs/{id}', function ($id) {
-    $job = Job::find($id);
-
+// Model Binding
+// - wild card and parameter name need to be identical
+// - add a type to the parameter
+// By default, it fetches based on id, but we can change that: Route::get('posts/{post:slug}')
+Route::get('/jobs/{job}', function (Job $job) {
     return view('jobs.show', ['job' => $job]);
 });
 
@@ -46,16 +48,14 @@ Route::post('/jobs', function () {
 });
 
 // Edit
-Route::get('/jobs/{id}/edit', function ($id) {
-    $job = Job::find($id);
-
+Route::get('/jobs/{job}/edit', function (Job $job) {
     return view('jobs.edit', [
         'job' => $job,
     ]);
 });
 
 // Update
-Route::patch('/jobs/{id}', function ($id) {
+Route::patch('/jobs/{job}', function (Job $job) {
     // validate
     request()->validate([
         'title' => ['required', 'min:3'],
@@ -67,10 +67,6 @@ Route::patch('/jobs/{id}', function ($id) {
     // update job
     // and persist
     // headstart: don't need to fetch it ourselves, check "Route Model Binding"
-    // find() returns null if not found, will blow up application
-    // use findOrFail() instead, which throws a ModelNotFound and Laravel converts it into an appropriate response
-    $job = Job::findOrFail($id);
-
     $job->update([
         'title' => request('title'),
         'salary' => request('salary'),
@@ -82,11 +78,11 @@ Route::patch('/jobs/{id}', function ($id) {
 });
 
 // Destroy
-Route::delete('/jobs/{id}', function ($id) {
+Route::delete('/jobs/{job}', function (Job $job) {
     // authorize (later)
 
     // delete job
-    Job::findOrFail($id)->delete();  // can inline instead of first storing in $job
+    $job->delete();  // can inline instead of first storing in $job
 
     // redirect
     return redirect('/jobs');
