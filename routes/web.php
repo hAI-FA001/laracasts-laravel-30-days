@@ -57,9 +57,22 @@ Route::get('/jobs/{id}/edit', function ($id) {
 // Update
 Route::patch('/jobs/{id}', function ($id) {
     // validate
+    request()->validate([
+        'title' => ['required', 'min:3'],
+        'salary' => ['required'],
+    ]);
+
     // authorize (later)
+
     // update job
+    // headstart: don't need to fetch it ourselves, check "Route Model Binding"
+    $job = Job::find($id);
+    $job->title = request('title');
+    $job->salary = request('salary');
+    $job->save();
+
     // persist
+
     // redirect to job-specific page
 });
 
