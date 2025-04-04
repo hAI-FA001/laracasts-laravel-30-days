@@ -67,9 +67,10 @@ Route::patch('/jobs/{id}', function ($id) {
     // update job
     // headstart: don't need to fetch it ourselves, check "Route Model Binding"
     $job = Job::find($id);
-    $job->title = request('title');
-    $job->salary = request('salary');
-    $job->save();
+    $job->update([
+        'title' => request('title'),
+        'salary' => request('salary'),
+    ]);
 
     // persist
 
