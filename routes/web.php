@@ -65,16 +65,20 @@ Route::patch('/jobs/{id}', function ($id) {
     // authorize (later)
 
     // update job
+    // and persist
     // headstart: don't need to fetch it ourselves, check "Route Model Binding"
-    $job = Job::find($id);
+    // find() returns null if not found, will blow up application
+    // use findOrFail() instead, which throws a ModelNotFound and Laravel converts it into an appropriate response
+    $job = Job::findOrFail($id);
+
     $job->update([
         'title' => request('title'),
         'salary' => request('salary'),
     ]);
 
-    // persist
 
     // redirect to job-specific page
+    return redirect('/jobs/' . $job->id);
 });
 
 // Destroy
