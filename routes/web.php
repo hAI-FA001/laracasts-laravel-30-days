@@ -45,12 +45,27 @@ Route::post('/jobs', function () {
     return redirect('/jobs');
 });
 
+// Edit
 Route::get('/jobs/{id}/edit', function ($id) {
     $job = Job::find($id);
 
     return view('jobs.edit', [
         'job' => $job,
     ]);
+});
+
+// Update
+Route::patch('/jobs/{id}', function ($id) {
+    // validate
+    // authorize (later)
+    // update job
+    // persist
+    // redirect to job-specific page
+});
+
+// Destroy
+Route::delete('/jobs/{id}', function ($id) {
+    // 
 });
 
 Route::get('/contact', function () {
