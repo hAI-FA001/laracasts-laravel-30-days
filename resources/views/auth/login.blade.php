@@ -1,5 +1,5 @@
 <x-layout>
-    <x-slot:heading>Register</x-slot:heading>
+    <x-slot:heading>Log In</x-slot:heading>
 
     <form method="POST" action="/login">
         @csrf
