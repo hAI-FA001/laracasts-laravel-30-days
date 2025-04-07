@@ -14,6 +14,11 @@ class SessionController extends Controller
         return view('auth.login');
     }
 
+    // other stuff to try:
+    // - rate limiting (control rate of requests sent to server)
+    // - reset password
+    // - delivering email
+
     public function store()
     {
         // validate
