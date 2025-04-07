@@ -34,5 +34,4 @@
             <x-form-button>Save</x-form-button>
         </div>
     </form>
-
 </x-layout>
