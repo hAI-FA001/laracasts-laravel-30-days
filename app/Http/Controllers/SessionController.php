@@ -24,12 +24,14 @@ class SessionController extends Controller
 
         // attempt to log in
         if (!Auth::attempt($validatedAttributes)) {
+            // similar to validate(), Laravel checks it's a ValidationException and automatically redirects to /login
             throw ValidationException::withMessages([
                 'email' => 'Sorry, those credentials don\'t match',
             ]);
         }
 
         // regenerate the session token
+        // security measure to protect against Session Hijacking (exploiting valid token for unauthorized access to a web server)
         request()->session()->regenerate();
 
         // redirect
