@@ -5,6 +5,7 @@ use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\SessionController;
 use App\Jobs\TranslateJob;
 use App\Mail\JobPosted;
+use App\Models\Job;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -59,7 +60,8 @@ Route::get('/test', function () {
     //     logger('Hello from queue');
     // })->delay(5);  // can delay, e.g. send welcome email 15 mins after sign-up
 
-    TranslateJob::dispatch();
+    $job = Job::first();
+    TranslateJob::dispatch($job);
 
     return 'done';
 });
