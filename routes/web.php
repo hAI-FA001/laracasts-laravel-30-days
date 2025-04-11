@@ -27,7 +27,9 @@ Route::get('/jobs/{job}', [JobController::class, 'show']);
 // another way for multiple middlewares
 Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])
     ->middleware('auth')
-    ->can('edit-job', 'job');
+    // laravel will know there's a link between Job model and Job policy
+    // finds job policy and runs edit()
+    ->can('edit', 'job');
 
 Route::patch('/jobs/{job}', [JobController::class, 'update'])
     ->middleware('auth')

@@ -36,8 +36,8 @@ class AppServiceProvider extends ServiceProvider
 
         // conditionally allows entry
         // note: this fails if the user is not signed in, so either set "User $user = null" or make it nullable "?User"
-        Gate::define('edit-job', function (User $user, Job $job) {
-            return $job->employer->user->is($user);
-        });
+        // Gate::define('edit-job', function (User $user, Job $job) {
+        //     return $job->employer->user->is($user);
+        // });
     }
 }
