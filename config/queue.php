@@ -37,6 +37,9 @@ return [
         'database' => [
             'driver' => 'database',
             'connection' => env('DB_QUEUE_CONNECTION'),
+            // same table we saw in TablePlus
+            // table to house all jobs while they're being processed
+            // we get migrations for this and related tables out of the box
             'table' => env('DB_QUEUE_TABLE', 'jobs'),
             'queue' => env('DB_QUEUE', 'default'),
             'retry_after' => (int) env('DB_QUEUE_RETRY_AFTER', 90),
@@ -106,6 +109,7 @@ return [
     'failed' => [
         'driver' => env('QUEUE_FAILED_DRIVER', 'database-uuids'),
         'database' => env('DB_CONNECTION', 'sqlite'),
+        // for database driver, it'll look in this table
         'table' => 'failed_jobs',
     ],
 
