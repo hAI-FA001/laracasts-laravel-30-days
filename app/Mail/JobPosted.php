@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Job;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -13,10 +14,15 @@ class JobPosted extends Mailable
 {
     use Queueable, SerializesModels;
 
+    // all public properties are available inside the view
+    // public $foo = 'bar';
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    // all public properties are available inside the view
+    // can use protected if don't want that
+    public function __construct(public Job $job)
     {
         //
     }
@@ -41,6 +47,10 @@ class JobPosted extends Mailable
     {
         return new Content(
             view: 'mail.job-posted',
+            // or we can specify what gets passed to the view
+            // with: [
+            //     'foo' => 'bar',
+            // ]
         );
     }
 
