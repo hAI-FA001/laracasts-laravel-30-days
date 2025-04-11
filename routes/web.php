@@ -53,6 +53,10 @@ Route::post('/login', [SessionController::class, 'store']);
 Route::post("/logout", [SessionController::class, 'destroy']);
 
 Route::get('/test', function () {
+    // queue closure
+    dispatch(function () {
+        logger('Hello from queue');
+    })->delay(5);  // can delay, e.g. send welcome email 15 mins after sign-up
 
     return 'done';
 });
