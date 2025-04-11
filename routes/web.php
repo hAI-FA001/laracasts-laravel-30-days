@@ -8,12 +8,42 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'home');
 Route::view('/contact', 'contact');
 
-Route::resource('jobs', JobController::class);
+// issue with one liner: middleware applies to all routes
+// Route::resource('jobs', JobController::class)->middleware('auth');
+
+// 1 solution
+// Route::resource('jobs', JobController::class)->only(['index', 'show']);
+// Route::resource('jobs', JobController::class)->except(['index', 'show'])->middleware('auth');
+
+// better to revert to single-route declarations
+Route::get('/jobs', [JobController::class, 'index']);
+Route::get('/jobs/create', [JobController::class, 'create']);
+Route::post('/jobs', [JobController::class, 'store'])->middleware('auth');
+Route::get('/jobs/{job}', [JobController::class, 'show']);
+
+// multiple middlewares, can:gate-name,implicit-model-binding
+// Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])->middleware(['auth', 'can:edit-job,job']);
+
+// another way for multiple middlewares
+Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])
+    ->middleware('auth')
+    ->can('edit-job', 'job');
+
+Route::patch('/jobs/{job}', [JobController::class, 'update'])
+    ->middleware('auth')
+    ->can('edit-job', 'job');
+
+Route::delete('/jobs/{job}', [JobController::class, 'destroy'])
+    ->middleware('auth')
+    ->can('edit-job', 'job');
+
 
 // Auth
 Route::get('/register', [RegisterUserController::class, 'create']);
 Route::post('/register', [RegisterUserController::class, 'store']);
 
-Route::get('/login', [SessionController::class, 'create']);
+// laravel looks for route named login if auth middleware fails
+// check named-routes in docs
+Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store']);
 Route::post("/logout", [SessionController::class, 'destroy']);
