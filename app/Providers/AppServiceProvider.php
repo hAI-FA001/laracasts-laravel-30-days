@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Job;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,5 +33,11 @@ class AppServiceProvider extends ServiceProvider
 
         // method 2 to disable fillable
         Model::unguard();
+
+        // conditionally allows entry
+        // note: this fails if the user is not signed in, so either set "User $user = null" or make it nullable "?User"
+        Gate::define('edit-job', function (User $user, Job $job) {
+            return $job->employer->user->is($user);
+        });
     }
 }
