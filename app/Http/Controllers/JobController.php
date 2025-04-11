@@ -48,6 +48,7 @@ class JobController extends Controller
         // could give user->email but Laravel is smart enough to grab it from the User object
         // issue: this is happening synchronously
         // solution: use queue() instead of send()
+        // note: had to run artisan cache:clear then artisan config:cache, because it was connecting to localhost instead of MAIL_HOST for some reason
         Mail::to($job->employer->user)->queue(
             new JobPosted($job)
         );
