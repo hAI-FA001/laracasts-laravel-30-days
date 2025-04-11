@@ -3,6 +3,7 @@
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\SessionController;
+use App\Jobs\TranslateJob;
 use App\Mail\JobPosted;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -54,9 +55,11 @@ Route::post("/logout", [SessionController::class, 'destroy']);
 
 Route::get('/test', function () {
     // queue closure
-    dispatch(function () {
-        logger('Hello from queue');
-    })->delay(5);  // can delay, e.g. send welcome email 15 mins after sign-up
+    // dispatch(function () {
+    //     logger('Hello from queue');
+    // })->delay(5);  // can delay, e.g. send welcome email 15 mins after sign-up
+
+    TranslateJob::dispatch();
 
     return 'done';
 });
