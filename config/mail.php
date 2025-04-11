@@ -14,6 +14,7 @@ return [
     |
     */
 
+    // overriden in .env with settings from Mailtrap (select Laravel 9+ code sample)
     'default' => env('MAIL_MAILER', 'log'),
 
     /*

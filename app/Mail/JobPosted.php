@@ -29,8 +29,8 @@ class JobPosted extends Mailable
         return new Envelope(
             subject: 'Job Posted',
             // can override on a per-mail basis
-            from: 'admin@hai.com',
-            replyTo: 'test@hai.com',
+            // from: 'admin@hai.com',
+            // replyTo: 'test@hai.com',
         );
     }
 
