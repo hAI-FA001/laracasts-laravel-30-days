@@ -1,1 +1,1 @@
-Congrats! Your jon is now live on our website.
+Congrats! Your job is now live on our website.
