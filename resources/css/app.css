@@ -8,6 +8,8 @@
 /* @tailwind components; */
 /* @tailwind utilities; */
 
+@config '../../tailwind.config.js';
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
@@ -19,6 +21,6 @@
 }
 
 /* even though we changed here, this css file is not under public so we need to build it */
-body {
-    background: green;
-}
+/* body { */
+    /* background: green; */
+/* } */

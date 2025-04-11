@@ -7,7 +7,11 @@ export default {
         "./resources/**/*.css",
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                laracasts: "rgb(50,138,241)",
+            },
+        },
     },
     plugins: [],
 };
