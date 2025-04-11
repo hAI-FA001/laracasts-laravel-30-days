@@ -48,6 +48,12 @@ class JobController extends Controller
 
     public function edit(Job $job)
     {
+        // specific methods for authorization
+        // alt way of performing the logic
+        // if (Auth::user()->cannot('edit-job', $job)) {
+        //     dd('failure');
+        // }
+
         Gate::authorize('edit-job', $job);
         // if don't want to abort, use Gate::allows() or Gate::denies()
 
