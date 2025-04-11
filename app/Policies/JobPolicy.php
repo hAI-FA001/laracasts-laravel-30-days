@@ -6,6 +6,8 @@ use App\Models\Job;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
+// tip: use policies for most non-trivial applications
+// stick with Gate facades if it's simple
 class JobPolicy
 {
     // is similar to the Gate we defined
